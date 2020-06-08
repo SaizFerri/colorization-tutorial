@@ -1,0 +1,8 @@
+_images/
+images/
+outputs/
+checkpoints/
+*.cwl.json
+*.red.json
+*.tar.gz
+*.log

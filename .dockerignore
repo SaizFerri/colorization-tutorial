@@ -1,0 +1,6 @@
+checkpoints/*
+images/*
+outputs/*
+*.tar.gz
+.git
+.cache

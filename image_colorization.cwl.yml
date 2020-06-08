@@ -1,0 +1,63 @@
+cwlVersion: "v1.0"
+class: "CommandLineTool"
+baseCommand: "image_colorization.py"
+doc: "Train a CNN for image colorization."
+
+inputs:
+  data_dir:
+    type: "Directory"
+    inputBinding:
+      position: 0
+    doc: "Data: Path to read-only directory containing image files."
+  outputs_dir:
+    type: "Directory"
+    inputBinding:
+      prefix: "--outputs-dir"
+    doc: "Data: Path to writable directory for the output images"
+  checkpoints_dir:
+    type: "Directory"
+    inputBinding:
+      prefix: "--checkpoints-dir"
+    doc: "Data: Path to writable directory for the checkpoint files"
+  learning_rate:
+    type: "float?"
+    inputBinding:
+      prefix: "--learning-rate"
+    doc: "Training: Learning rate. Default: 0.001"
+  batch_size:
+    type: "int?"
+    inputBinding:
+      prefix: "--batch-size"
+    doc: "Training: Batch size. Default: 64"
+  num_epochs:
+    type: "int?"
+    inputBinding:
+      prefix: "--num-epochs"
+    doc: "Training: Number of epochs. Default: 100"
+  log_dir:
+    type: "Directory?"
+    inputBinding:
+      prefix: "--log-dir"
+    doc: "Debug: Path to writable directory for a log file to be created. Default: log to stdout / stderr"
+  log_file_name:
+    type: "string?"
+    inputBinding:
+      prefix: "--log-file-name"
+    doc: "Debug: Name of the log file, generated when --log-dir is set. Default: training.log"
+
+outputs:
+  weights_file:
+    type: "File?"
+    outputBinding:
+      glob: "checkpoints/model.pth"
+    doc: "CNN model weights in PTH format."
+  gray_image_file:
+    type: "File?"
+    outputBinding:
+      glob: "outputs/gray/img.jpg"
+    doc: "Output images"
+  color_image_file:
+    type: "File?"
+    outputBinding:
+      glob: "outputs/color/img.jpg"
+    doc: "Output images"
